@@ -14,32 +14,32 @@
       
     <nav class="dock">
         <div class="main-nav">
-            <img class="active" src="img/icons/feed.svg">
-            <img src="img/icons/feed.svg">
+            <button class="icon active"><img src="img/icons/feed.svg"><div class="active-marker"></div></button>
+            <button class="icon"><img src="img/icons/collection.svg"><div class="active-marker"></div></button>
         </div>
         <div class="mini-player">
-            <img class="song-snapshot" src="img/art/sigrid1.png">
+            <div class="song-snapshot"></div>
             <div class="song-info">
                 <h5>Sigrid</h5>
                 <h4 class="secondary">Fake Friends</h4>
             </div>
             <div class="song-controls">
-                <img src="img/icons/prev.svg">
-                <img src="img/icons/next.svg">
-                <img src="img/icons/pause.svg">
+                <button class="icon"><img src="img/icons/prev.svg"></button>
+                <button class="icon"><img src="img/icons/next.svg"></button>
+                <button class="icon"><img src="img/icons/pause.svg"></button>
             </div>
         </div>
     </nav>
     
     <main class="content">
         <section class="topbar">
-            <div class="menu-btn"></div>
-            <div class="search">
-                <img src="img/icons/search.svg">
-                <h2>Search</h2>
+            <div class="menu-btn"><button class="icon"><img src="img/icons/menu.svg"></button></div>
+            <div type="text" class="search">
+                <button class="icon"><img src="img/icons/search.svg"></button>
+                <input class="search-bar" type="search" placeholder="Search">
             </div>
         </section>
-        <section class="info-head">
+        <section class="nav-head">
             <h1>Feed</h1>
             <div class="local-nav">
                 <h4 class="active">Recent</h4>
@@ -47,33 +47,48 @@
                 <h4>Discover</h4>
             </div>
         </section>
-        <section class="quick-action">
-            <button class="button special">
-                <img src="img/icons/shuffle.svg">
-            </button>
-            <h2>Shuffle Recents</h2>
-        </section>
+        
         <section class="content-inner">
-            <div class="album-entry">
-                <img src="img/art/clairo1.png">
-                <h5>Clairo</h5>
-                <h4 class="secondary">Alewife</h4>
-            </div>
-            <div class="album-entry">
-                <img src="img/art/clairo1.png">
-                <h5>Clairo</h5>
-                <h4 class="secondary">Alewife</h4>
-            </div>
-            <div class="album-entry">
-                <img src="img/art/clairo1.png">
-                <h5>Clairo</h5>
-                <h4 class="secondary">Alewife</h4>
-            </div>
-            <div class="album-entry">
-                <img src="img/art/clairo1.png">
-                <h5>Clairo</h5>
-                <h4 class="secondary">Alewife</h4>
-            </div>
+            
+            <section class="quick-action">
+                <button class="button special">
+                    <img src="img/icons/shuffle.svg">
+                </button>
+                <h2>Shuffle Recents</h2>
+            </section>
+            
+            <section class="content-entries">
+                <div class="media-entry-large">
+                    <img src="img/art/clairo1.png">
+                    <h5>Clairo</h5>
+                    <h4 class="secondary">Alewife</h4>
+                </div>
+                <div class="media-entry-large">
+                    <img src="img/art/clairo1.png">
+                    <h5>Clairo</h5>
+                    <h4 class="secondary">Alewife</h4>
+                </div>
+                <div class="media-entry-large">
+                    <img src="img/art/clairo1.png">
+                    <h5>Clairo</h5>
+                    <h4 class="secondary">Alewife</h4>
+                </div>
+                <div class="media-entry-large">
+                    <img src="img/art/clairo1.png">
+                    <h5>Clairo</h5>
+                    <h4 class="secondary">Alewife</h4>
+                </div>
+                <div class="media-entry-large">
+                    <img src="img/art/clairo1.png">
+                    <h5>Clairo</h5>
+                    <h4 class="secondary">Alewife</h4>
+                </div>
+                <div class="media-entry-large">
+                    <img src="img/art/clairo1.png">
+                    <h5>Clairo</h5>
+                    <h4 class="secondary">Alewife</h4>
+                </div>
+            </section>
         </section>
     </main>
     

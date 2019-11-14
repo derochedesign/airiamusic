@@ -19,15 +19,18 @@
 
     --linespace: 1.5;
     --tight-padding: 1em;
+    --gap: 1em;
     --padding: 2.4em;
     --toppadding: 2em;
     
     --max-width: 70rem;
     
     --shadow: 0 0 10px 1px rgba(0,0,0,0.3);
-    --shadow-white: 0 0 1em rgba(255,255,255,0.2);
+    --shadow-white: 0 0 0.2em rgba(255,255,255,0.8);
     
     --round: 100%;
+    --corner-medium: 0.4em;
+    --corner-large: 0.5em;
     
     /* z-index */
     --z-cursor: 1000;
@@ -48,6 +51,10 @@ html {
     color: var(--colour-text);
 }
 
+p, h1, h2, h3, h4, h5, h6 {
+    color: var(--colour-text);
+}
+
 p {
     font: var(--regular) 1.2em/var(--linespace) var(--font);
 }
@@ -57,24 +64,24 @@ p span {
 }
 
 h1 {
-    font: var(--bold) 3em/1.3 var(--font);
+    font: var(--bold) 2.6em/1.3 var(--font);
 }
 
-h2 {
-    font: var(--light) 1em/1.3 var(--font);
+h2, input {
+    font: var(--light) 1.2em/1.3 var(--font);
 }
 h3 {
     font: var(--light) 1.26em/var(--linespace) var(--font);
 }
 h4 {
-    font: var(--regular) 0.75em/var(--linespace) var(--font);
+    font: var(--regular) 0.8em/var(--linespace) var(--font);
 }
 h4.active, h4.secondary, h3.secondary {
     font-weight: var(--bold);
 }
 
 h5 {
-    font: var(--light) 0.75em/var(--linespace) var(--font);
+    font: var(--light) 0.8em/var(--linespace) var(--font);
 }
 
 h6 {
@@ -86,32 +93,121 @@ body {
 }
 
 main {
-    padding: var(--padding);
+    color: var(--colour-text);
 }
+
+/* ________________BTNS__________________ */
+
+button.button, button {
+    
+    border: none;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    outline: none;
+}
+button.icon {
+    width: 2.2em;
+    height: 2.2em;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+}
+button.icon img {
+    width: 100%;
+}
+
+/* ________________INPUTS__________________ */
+
+input.search-bar {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin:0;
+    outline: none;
+    width: 100%;
+}
+
 
 /* ________________DOCK__________________ */
 
 nav.dock {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: 100%;
-    background-color: red;
-    grid-template-columns: min-content auto;
+    background: linear-gradient(transparent, white 70%);
+    grid-template-columns: 30% 70%;
     display: grid;
+    height: 82px;
+    padding: 0 calc(var(--padding) / 3) calc(var(--padding) / 3) calc(var(--padding) / 4);
 }
 
 nav.dock .main-nav {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    background-color: green;
     padding: var(--tight-padding);
+    align-items: center;
+    max-width: 6.4em;
+}
+
+.active-marker {
+    position: absolute;
+    width: 0.3em;
+    height: 0.3em;
+    background-color: black;
+    border-radius: var(--round);
+    bottom: -0.6em;
+    left: 50%;
+    transform: translateX(-50%);
+    display: none;
+}
+
+nav.dock .main-nav button.icon.active{
+    position: relative;
+}
+
+nav.dock .main-nav button.icon.active .active-marker {
+    display: block;
+}
+
+nav.dock .main-nav :first-child {
+    justify-self: left;
+}
+nav.dock .main-nav :last-child {
+    justify-self: right;
+}
+nav.dock .main-nav img {
+    filter: drop-shadow(var(--shadow-white));
 }
 
 nav.dock .mini-player {
-    background-color: blue;
-    padding: var(--tight-padding);
+    background-color: var(--colour-darkpurple);
+    padding: calc(var(--tight-padding) / 1.5);
+    border-radius: var(--corner-large);
     display: grid;
     grid-template-columns: min-content max-content auto;
+    align-items: center;
+    justify-items: center;
+    grid-gap: calc( var(--gap) / 2);
+    --colour-text: white;
+}
+nav.dock .mini-player .icon {
+    filter: invert(1);
+}
+nav.dock .mini-player .song-snapshot {
+    width: 2em;
+    height: 100%;
+    background-image: url('../img/art/sigrid1.jpg');
+    background-size: 6em;
+    background-position: center;
+    border-radius: var(--corner-medium);
+}
+
+nav.dock .mini-player .song-controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 100%;
+    justify-items: center;
 }
 
 /* ________________TOPBAR__________________ */
@@ -120,22 +216,73 @@ section.topbar {
     width: 100%;
     display: grid;
     grid-template-columns: min-content auto;
+    grid-gap: 2em;
+    align-items: center;
+}
+section.topbar .menu-btn button.icon, section.topbar .search button.icon {
+    width: 1.8em;
+    height: 1.8em;
 }
 section.topbar .search {
     display: grid;
     grid-template-columns: min-content auto;
+    background-color: var(--colour-lavender);
+    padding: calc(var(--tight-padding) / 1.3) var(--tight-padding);
+    border-radius: var(--corner-large);
+    grid-gap: var(--gap);
+    align-items: center;
+}
+
+/* ________________CONTENT LAYOUT__________________ */
+
+main.content {
+    display: grid;
+    grid-template-rows: min-content min-content auto;
+    height: 100vh;
+    grid-gap: var(--gap);
+    padding: var(--padding);
+    padding-bottom: 0;
+}
+
+/* ________________NAV-HEAD__________________ */
+
+section.nav-head {
+    display: grid;
+    grid-template-columns: min-content min-content;
+    grid-gap: var(--gap);
+    align-items: baseline;
+    transition: 1s ease;
+}
+
+section.nav-head.scrolled h1 {
+    display: none;
+}
+
+section.nav-head .local-nav {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: var(--gap);
 }
 
 /* ________________INNER__________________ */
 
 section.content-inner {
+    overflow: auto;
+}
+section.content-entries {
     display: flex;
     flex-wrap: wrap;
+    margin-left: calc(var(--padding) / -2);
+    padding-bottom: 6em;
 }
 
-section.content-inner .album-entry {
+section.content-entries .media-entry-large {
     width: 50%;
-    background-color: yellow;
+    padding-left: calc(var(--padding) / 2);
+}
+section.content-entries .media-entry-large img {
+    width: 100%;
+    border-radius: var(--corner-large);
 }
 
 @media screen and (min-width: 70em) {
