@@ -14,6 +14,8 @@
     --colour-grad-purple: #D55BFF;
     --colour-grad-blue: #45C0EE;
     
+    --main-grad: linear-gradient(45deg, var(--colour-grad-blue), var(--colour-grad-purple));
+    
     --font: "Nunito Sans", "Helvetica", sans-serif;
     
     --bold: 700;
@@ -36,7 +38,7 @@
     --corner-large: 0.5em;
     
     /* z-index */
-    --z-cursor: 1000;
+    --z-dock: 100;
 }
 
 * {
@@ -111,22 +113,19 @@ button.button, button {
     margin: 0;
     outline: none;
 }
-button.icon {
+button.icon, .icon {
     width: 2em;
     height: 2em;
     display: grid;
     align-items: center;
     justify-items: center;
 }
-button.icon img {
-    width: 100%;
-}
 
 button.icon.special {
     width: 3em;
     height: 3em;
     padding: calc(var(--tight-padding) / 2);
-    background: linear-gradient(45deg, var(--colour-grad-blue), var(--colour-grad-purple));
+    background: var(--main-grad);
     border-radius: var(--corner-large);
 }
 button.icon.special img {
@@ -159,6 +158,7 @@ nav.dock {
     grid-template-columns: 30% 70%;
     display: grid;
     padding: 0 calc(var(--padding) / 3) calc(var(--padding) / 3) calc(var(--padding) / 4);
+    z-index: var(--z-dock);
 }
 
 nav.dock .main-nav {
@@ -209,6 +209,8 @@ nav.dock .mini-player {
     justify-items: center;
     grid-gap: calc( var(--gap) / 2);
     --colour-text: white;
+    position: relative;
+    overflow: hidden;
 }
 nav.dock .mini-player .icon {
     filter: invert(1);
@@ -229,6 +231,16 @@ nav.dock .mini-player .song-controls {
     justify-items: center;
     max-width: 8em;
     justify-self: right;
+}
+
+nav.dock .mini-player .duration-bar {
+    position: absolute;
+    height: 0.3em;
+    bottom: 0;
+    background: var(--main-grad);
+    z-index: 1;
+    width: 37%;
+    justify-self: left;
 }
 
 /* ________________TOPBAR__________________ */
@@ -324,11 +336,46 @@ section.content-entries .media-entry-large {
     width: 50%;
     padding-left: calc(var(--padding) / 2);
     padding-bottom: calc(var(--tight-padding) / 1);
+    max-width: 16em;
+    display: grid;
+    grid-template-columns: auto min-content;
+    grid-template-rows: auto auto;
 }
 section.content-entries .media-entry-large img {
     width: 100%;
     border-radius: var(--corner-large);
-    padding-bottom: calc(var(--tight-padding) / 6);
+    margin-bottom: calc(var(--tight-padding) / 2);
+    grid-column: span 2;
+}
+
+/* ________________PLAYING ANIM__________________ */
+
+@keyframes playing {
+
+	0%
+	{
+		background-position: 0 0;
+	}
+
+	100%
+	{
+		background-position: -60px 0;
+	}
+
+}
+
+.now-playing
+{
+    display: inline-block;
+    vertical-align: middle;
+	height: 20px;
+	width: 18px;
+	overflow: hidden;
+	background: url(http://svgur.com/i/5R7.svg);
+	background-size: 30px 20px;
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	animation: playing 3.6s linear infinite;
 }
 
 @media screen and (min-width: 70em) {
