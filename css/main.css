@@ -13,6 +13,8 @@
     --colour-darkfont: #281A36;
     --colour-grad-purple: #D55BFF;
     --colour-grad-blue: #45C0EE;
+    --colour-lightpurple: #2B1C39;
+    --colour-magenta: #502F59;
     
     --main-grad: linear-gradient(45deg, var(--colour-grad-blue), var(--colour-grad-purple));
     
@@ -34,11 +36,14 @@
     --shadow-white: 0 0 0.2em rgba(255,255,255,0.8);
     
     --round: 100%;
+    --corner-small: 0.2em;
     --corner-medium: 0.4em;
     --corner-large: 0.5em;
+    --corner-xl: 1em;
     
     /* z-index */
     --z-dock: 100;
+    --z-player: 200;
 }
 
 * {
@@ -97,6 +102,7 @@ h6 {
 
 body {
     /* background-color: var(--colour-blue); */
+    overflow: hidden;
 }
 
 main {
@@ -154,7 +160,7 @@ nav.dock {
     position: fixed;
     bottom: 0;
     width: 100%;
-    background: linear-gradient(transparent, white 70%);
+    background: linear-gradient(rgba(255,255,255,0), white 70%);
     grid-template-columns: 30% 70%;
     display: grid;
     padding: 0 calc(var(--padding) / 3) calc(var(--padding) / 3) calc(var(--padding) / 4);
@@ -198,6 +204,8 @@ nav.dock .main-nav :last-child {
 nav.dock .main-nav img {
     filter: drop-shadow(var(--shadow-white));
 }
+
+/* ________________DOCK -> MINI PLAYER__________________ */
 
 nav.dock .mini-player {
     background-color: var(--colour-darkpurple);
@@ -243,6 +251,146 @@ nav.dock .mini-player .duration-bar {
     justify-self: left;
 }
 
+/* ________________FULL PLAYER__________________ */
+
+section.full-player {
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    background-color: var(--colour-darkpurple);
+    z-index: var(--z-player);
+    display: grid;
+    grid-template-rows: min-content min-content auto min-content;
+    grid-gap: calc(var(--gap) * 2);
+    padding: var(--padding);
+    --colour-text: var(--colour-white);
+    top: 100vh;
+    transition: 0.5s ease;
+}
+section.full-player.active {
+    top:0
+}
+
+section.full-player h1 {
+    font: var(--bold) 1.3em/1.3 var(--font);
+}
+section.full-player h2 {
+    font: var(--light) 1.3em/1.3 var(--font);
+    --colour-text: var(--colour-white);
+    text-decoration: underline;
+}
+section.full-player h3 {
+    font: var(--bold) 1em/1.3 var(--font);
+}
+section.full-player h5 {
+    font: var(--light) 0.68em/1.3 var(--font);
+}
+
+section.full-player .topbar {
+    display: grid;
+    grid-template-columns: min-content auto;
+    grid-gap: var(--gap);
+}
+section.full-player .topbar .song-info > * {
+    display: inline-block;
+}
+section.full-player .topbar .song-info h2 {
+    margin-right: var(--tight-padding);
+}
+section.full-player .topbar button.icon {
+    width: 2em;
+    height: unset;
+}
+
+section.full-player .song-art {
+    display: grid;
+    position: relative;
+    margin-bottom: var(--tight-padding);
+}
+
+section.full-player .song-art img {
+    width: 100%;
+    border-radius: var(--corner-xl);
+}
+section.full-player .song-art button.variate-btn {
+    justify-self: center;
+    position: absolute;
+    bottom: 0;
+    transform: translateY(50%);
+    width: 4em;
+    height: 4em;
+    padding: calc(var(--tight-padding) / 1.2);
+    border-radius: calc(var(--corner-large) * 1.4);
+}
+
+section.full-player .variate-info > * {
+    display: inline-block;
+}
+section.full-player .variation {
+    display: grid;
+    grid-template-rows: min-content auto;
+    grid-gap: var(--gap);
+}
+section.full-player .variate-cells {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: var(--gap);
+    height: 100%;
+}
+section.full-player .variate-cell {
+    width: 100%;
+    height: 100%;
+    background-color: var(--colour-lightpurple);
+    border: solid 0.3em var(--colour-magenta);
+    border-radius: var(--corner-large);
+}
+
+section.full-player .player {
+    width: 100%;
+    align-self: end;
+}
+section.full-player .player .player-controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-items: right;
+    margin-bottom: var(--tight-padding);
+}
+section.full-player .player .player-controls :first-child {
+    justify-self: left;
+}
+section.full-player .player .player-controls div img {
+    filter: invert(1);
+}
+section.full-player .player .player-controls div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: calc(var(--gap) / 1.4);
+}
+section.full-player .player .player-timeline {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    align-items: center;
+    grid-gap: calc(var(--gap) / 2);
+}
+section.full-player .player .player-timeline .time-bar {
+    width: 100%;
+    height: 0.6em;
+    border: solid 0.12em var(--colour-white);
+    border-radius: var(--corner-small);
+    overflow: hidden;
+    grid-column: span 2;
+}
+section.full-player .player .player-timeline .duration-bar {
+    background-color: var(--colour-white);
+    height: 100%;
+    width: 35%;
+}
+section.full-player .player .player-timeline :last-child {
+    justify-self: right;
+}
 /* ________________TOPBAR__________________ */
 
 section.topbar {
@@ -340,6 +488,10 @@ section.content-entries .media-entry-large {
     display: grid;
     grid-template-columns: auto min-content;
     grid-template-rows: auto auto;
+    opacity: 1;
+}
+section.content-entries .media-entry-large:hover {
+    opacity: 0.6;
 }
 section.content-entries .media-entry-large img {
     width: 100%;
@@ -371,7 +523,7 @@ section.content-entries .media-entry-large img {
 	height: 20px;
 	width: 18px;
 	overflow: hidden;
-	background: url(http://svgur.com/i/5R7.svg);
+	background: url(../img/icons/wave.svg);
 	background-size: 30px 20px;
 	background-position: 0 0;
 	background-repeat: repeat-x;
