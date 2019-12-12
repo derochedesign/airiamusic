@@ -9,7 +9,6 @@
     <link rel="icon" href="img/favicon.png">
     <link rel="stylesheet" href="css/main.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="js/main.js"></script>
   </head>
   <body>
       
@@ -88,9 +87,9 @@
         <section class="nav-head">
             <h1>Feed</h1>
             <div class="local-nav">
-                <h4 class="active">Recent<div class="active-marker"></div></h4>
-                <h4>New<div class="active-marker"></div></h4>
-                <h4>Discover<div class="active-marker"></div></h4>
+                <h4 data-select="0" class="active">Recent<div class="active-marker"></div></h4>
+                <h4 data-select="1">New<div class="active-marker"></div></h4>
+                <h4 data-select="2">Discover<div class="active-marker"></div></h4>
             </div>
         </section>
         
@@ -103,7 +102,7 @@
                 <h2>Shuffle Recents</h2>
             </section>
             
-            <section class="content-entries">
+            <section id="feedElem" class="content-entries">
                 <div class="media-entry-large">
                     <img src="img/art/clairo1.png">
                     <div>

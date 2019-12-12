@@ -404,6 +404,12 @@ section.topbar .menu-btn button.icon, section.topbar .search button.icon {
     width: 1.6em;
     height: 1.6em;
 }
+section.topbar .menu-btn {
+    transition: 0.8s ease;
+}
+section.topbar .menu-btn.active {
+    transform: rotate(225deg);
+}
 section.topbar .search {
     display: grid;
     grid-template-columns: min-content auto;

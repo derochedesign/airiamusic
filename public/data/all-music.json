@@ -1,0 +1,161 @@
+{
+    "songs": [
+        {
+            "id":101,
+            "title":"Alewife",
+            "artist": {
+                "title":"Clairo",
+                "id":201
+            },
+            "releaseDate":"2019-08-02",
+            "group": {
+                "type":"album",
+                "title":"Immunity",
+                "id":301
+            },
+            "genre": [
+                "indie-pop","indie","alternative"
+            ],
+            "tags": [
+                "emotional","soft","moody"
+            ]
+        },
+        {
+            "id":102,
+            "title":"Grimy Waifu",
+            "artist": {
+                "title":"JPEGMAFIA",
+                "id":202
+            },
+            "releaseDate":"2019-09-13",
+            "group": {
+                "type":"album",
+                "title":"All My Heroes Are Cornballs",
+                "id":302
+            },
+            "genre": [
+                "rap/hip-hop","experimental","punk-rap","avant-garde"
+            ],
+            "tags": [
+                "loud","edgy","experimental"
+            ]
+        },
+        {
+            "id":103,
+            "title":"Speaking Terms",
+            "artist": {
+                "title":"Snail Mail",
+                "id":203
+            },
+            "releaseDate":"2018-06-08",
+            "group": {
+                "type":"album",
+                "title":"LUSH",
+                "id":303
+            },
+            "genre": [
+                "indie-rock","indie","alternative"
+            ],
+            "tags": [
+                "emotional","mellow"
+            ]
+        }
+    ],
+    "artists": [
+        {
+            "id":201,
+            "title": "Clairo",
+            "slug":"clairo",
+            "bio": "Associated with soft, intimate vocals, daydreamy atmosphere, and rumination, Clairo is singer/songwriter Claire Cottrill. Alternating keyboards and guitar as accompaniment, and often coloring her recordings with samples and sound effects, the Boston native began sharing dozens of her stylized but low-key, melody-driven tunes to music-sharing sites as a young teen in 2013. She eventually had a minor viral hit with 2017's \"Pretty Girl,\" and a bigger one with \"Flaming Hot Cheetos,\" whose video garnered millions of views in 2018. Officially dropping the \"bedroom\" from bedroom pop, Clairo made her full-length debut with Immunity in 2019.",
+            "releases": [
+                301
+            ],
+            "startDate":2012,
+            "linkout":"https://clairo.com",
+            "genre": [
+                "bedroom", "indie-pop", "lo-fi", "indie", "alternative"
+            ]  
+        },
+        {
+            "id":202,
+            "title": "JPEGMAFIA",
+            "slug":"jpegmafia",
+            "bio": "A rapper",
+            "releases": [
+                302
+            ],
+            "startDate":2007,
+            "linkout":"https://www.jpegmafia.net/",
+            "genre": [
+                "rap/hip-hop", "experimental", "avant-garde"
+            ]
+        },
+        {
+            "id":203,
+            "title": "Snail Mail",
+            "slug":"snailmail",
+            "bio": "Lindsay is great",
+            "releases": [
+                303
+            ],
+            "startDate":2015,
+            "linkout":"https://www.snailmail.band/",
+            "genre": [
+                "indie-rock", "alternative", "indie"
+            ]
+        }
+    ],
+    "releases": [
+        {
+            "id":301,
+            "title": "Immunity",
+            "slug": "immunity-clairo",
+            "date": "2019-08-02",
+            "type": "album",
+            "artist": {
+                "title":"Clairo",
+                "id":201
+            },
+            "songs":[
+                101
+            ],
+            "genre": [
+                "indie", "indie-pop"
+            ]
+        },
+        {
+            "id":302,
+            "title": "All My Heroes Are Cornballs",
+            "slug": "allmyheroesarecornballs-jpegmafia",
+            "date": "2019-09-13",
+            "type": "album",
+            "artist": {
+                "title":"JPEGMAFIA",
+                "id":202
+            },
+            "songs":[
+                102
+            ],
+            "genre": [
+                "experimental", "rap/hip-hop", "punk-rap"
+            ]
+        },
+        {
+            "id":303,
+            "title": "LUSH",
+            "slug": "lush-snailmail",
+            "date": "2018-06-08",
+            "type": "album",
+            "artist": {
+                "title":"Snail Mail",
+                "id":203
+            },
+            "songs":[
+                103
+            ],
+            "genre": [
+                "indie", "indie-rock"
+            ]
+        }
+    ]
+}
