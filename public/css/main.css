@@ -42,8 +42,10 @@
     --corner-xl: 1em;
     
     /* z-index */
-    --z-dock: 100;
+    --z-max: 1000;
     --z-player: 200;
+    --z-menu: 150;
+    --z-dock: 100;
 }
 
 * {
@@ -126,6 +128,9 @@ button.icon, .icon {
     align-items: center;
     justify-items: center;
 }
+button.icon img, .icon img {
+    pointer-events: none;
+}
 
 button.icon.special {
     width: 3em;
@@ -172,7 +177,7 @@ nav.dock .main-nav {
     grid-template-columns: 1fr 1fr;
     padding: var(--tight-padding);
     align-items: center;
-    max-width: 6.4em;
+    max-width: 6.2em;
 }
 
 .active-marker {
@@ -184,7 +189,8 @@ nav.dock .main-nav {
     bottom: -0.6em;
     left: 50%;
     transform: translateX(-50%);
-    display: none;
+    opacity: 0;
+    transition: 0.3s ease;
 }
 
 nav.dock .main-nav button.icon.active{
@@ -192,7 +198,7 @@ nav.dock .main-nav button.icon.active{
 }
 
 nav.dock .main-nav button.icon.active .active-marker {
-    display: block;
+    opacity: 1;
 }
 
 nav.dock .main-nav :first-child {
@@ -222,12 +228,16 @@ nav.dock .mini-player {
 }
 nav.dock .mini-player .icon {
     filter: invert(1);
+    pointer-events: all;
+}
+nav.dock .mini-player > * {
+    pointer-events: none;
 }
 nav.dock .mini-player .song-snapshot {
     width: 2em;
     height: 100%;
-    background-image: url('../img/art/sigrid1.jpg');
-    background-size: 6em;
+    background-image: url('../img/art/fakefriends-sigrid.jpg');
+    background-size: 4em;
     background-position: center;
     border-radius: var(--corner-medium);
 }
@@ -247,7 +257,7 @@ nav.dock .mini-player .duration-bar {
     bottom: 0;
     background: var(--main-grad);
     z-index: 1;
-    width: 37%;
+    width: 0%;
     justify-self: left;
 }
 
@@ -269,7 +279,7 @@ section.full-player {
     transition: 0.5s ease;
 }
 section.full-player.active {
-    top:0
+    top:0;
 }
 
 section.full-player h1 {
@@ -309,7 +319,7 @@ section.full-player .song-art {
     margin-bottom: var(--tight-padding);
 }
 
-section.full-player .song-art img {
+section.full-player .song-art img.artwork {
     width: 100%;
     border-radius: var(--corner-xl);
 }
@@ -397,18 +407,26 @@ section.topbar {
     width: 100%;
     display: grid;
     grid-template-columns: min-content auto;
-    grid-gap: 2em;
+    grid-gap: calc(var(--gap) * 2);
     align-items: center;
 }
 section.topbar .menu-btn button.icon, section.topbar .search button.icon {
     width: 1.6em;
     height: 1.6em;
 }
-section.topbar .menu-btn {
+section.topbar .menu-btn button {
     transition: 0.8s ease;
 }
-section.topbar .menu-btn.active {
+section.topbar .menu-btn img {
+    pointer-events: none;
+}
+section.topbar .menu-btn button.active {
     transform: rotate(225deg);
+    z-index: var(--z-max);
+    position: relative;
+}
+section.topbar .menu-btn button.active img {
+    /* filter: invert(1); */
 }
 section.topbar .search {
     display: grid;
@@ -420,9 +438,31 @@ section.topbar .search {
     align-items: center;
 }
 
+/* ________________MENU__________________ */
+
+section.menu {
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    border-radius: 5em;
+    backdrop-filter: blur(1em);
+    position: fixed;
+    z-index: var(--z-menu);
+    top: 0;
+    left: 0;
+    transition: 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+    padding: var(--padding);
+    transform: scale(0);
+}
+section.menu.active {
+    transform: scale(1);
+    background-color: rgba(255,255,255,0.6);
+    border-radius: 0;
+}
+
 /* ________________CONTENT LAYOUT__________________ */
 
-main.content {
+main.content div.feed {
     display: grid;
     grid-template-rows: min-content min-content auto;
     height: 100vh;
@@ -456,10 +496,11 @@ section.nav-head .local-nav .active-marker {
     width: 0.6em;
     height: 0.16em;
     border-radius: 5em;
-    bottom: -0.3em;
+    bottom: 0.3em;
 }
 section.nav-head .local-nav h4.active .active-marker {
-    display: block;
+    opacity: 1;
+    bottom: -0.3em;
 }
 
 /* ________________INNER__________________ */

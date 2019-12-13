@@ -3,14 +3,17 @@
         {
             "id":101,
             "title":"Alewife",
+            "slug":"alewife",
             "artist": {
                 "title":"Clairo",
+                "slug":"clairo",
                 "id":201
             },
             "releaseDate":"2019-08-02",
             "group": {
                 "type":"album",
                 "title":"Immunity",
+                "slug":"immunity",
                 "id":301
             },
             "genre": [
@@ -23,14 +26,17 @@
         {
             "id":102,
             "title":"Grimy Waifu",
+            "slug":"grimywaifu",
             "artist": {
                 "title":"JPEGMAFIA",
+                "slug":"jpegmafia",
                 "id":202
             },
             "releaseDate":"2019-09-13",
             "group": {
                 "type":"album",
                 "title":"All My Heroes Are Cornballs",
+                "slug":"allmyheroesarecornballs",
                 "id":302
             },
             "genre": [
@@ -43,14 +49,17 @@
         {
             "id":103,
             "title":"Speaking Terms",
+            "slug":"speakingterms",
             "artist": {
                 "title":"Snail Mail",
+                "slug":"snailmail",
                 "id":203
             },
             "releaseDate":"2018-06-08",
             "group": {
                 "type":"album",
                 "title":"LUSH",
+                "slug":"lush",
                 "id":303
             },
             "genre": [
@@ -58,6 +67,75 @@
             ],
             "tags": [
                 "emotional","mellow"
+            ]
+        },
+        {
+            "id":104,
+            "title":"Fake Friends",
+            "slug":"fakefriends",
+            "artist": {
+                "title":"Sigrid",
+                "slug":"sigrid",
+                "id":204
+            },
+            "releaseDate":"2017-05-12",
+            "group": {
+                "type":"single",
+                "title":"Fake Friends",
+                "slug":"fakefriends",
+                "id":304
+            },
+            "genre": [
+                "pop","indie-pop"
+            ],
+            "tags": [
+                "upbeat"
+            ]
+        },
+        {
+            "id":105,
+            "title":"FEELIN ALIVE",
+            "slug":"feelinalive",
+            "artist": {
+                "title":"RG",
+                "slug":"rg",
+                "id":205
+            },
+            "releaseDate":"2020-02-14",
+            "group": {
+                "type":"album",
+                "title":"Banko",
+                "slug":"banko",
+                "id":305
+            },
+            "genre": [
+                "rap/hip-hop"
+            ],
+            "tags": [
+                "smooth"
+            ]
+        },
+        {
+            "id":106,
+            "title":"White Flag",
+            "slug":"whiteflag",
+            "artist": {
+                "title":"Clairo",
+                "slug":"clairo",
+                "id":201
+            },
+            "releaseDate":"2019-08-02",
+            "group": {
+                "type":"album",
+                "title":"Immunity",
+                "slug":"immunity",
+                "id":301
+            },
+            "genre": [
+                "indie","indie-pop", "alternative"
+            ],
+            "tags": [
+                "upbeat","emotional"
             ]
         }
     ],
@@ -102,6 +180,34 @@
             "linkout":"https://www.snailmail.band/",
             "genre": [
                 "indie-rock", "alternative", "indie"
+            ]
+        },
+        {
+            "id":204,
+            "title": "Sigrid",
+            "slug":"sigrid",
+            "bio": "Rising Norwegian pop star.",
+            "releases": [
+                304
+            ],
+            "startDate":2014,
+            "linkout":"https://www.thisissigrid.com/",
+            "genre": [
+                "pop", "indie-pop", "electronic"
+            ]
+        },
+        {
+            "id":205,
+            "title": "RG",
+            "slug":"rg",
+            "bio": "White rap boyband.",
+            "releases": [
+                305
+            ],
+            "startDate":2015,
+            "linkout":"https://www.deroche.design/",
+            "genre": [
+                "rap/hip-hop", "alternative"
             ]
         }
     ],
@@ -155,6 +261,40 @@
             ],
             "genre": [
                 "indie", "indie-rock"
+            ]
+        },
+        {
+            "id":304,
+            "title": "Fake Friends",
+            "slug": "fakefriends-sigrid",
+            "date": "2017-05-12",
+            "type": "single",
+            "artist": {
+                "title":"Sigrid",
+                "id":204
+            },
+            "songs":[
+                104
+            ],
+            "genre": [
+                "pop", "indie-pop"
+            ]
+        },
+        {
+            "id":305,
+            "title": "Banko",
+            "slug": "banko-rg",
+            "date": "2020-02-14",
+            "type": "album",
+            "artist": {
+                "title":"RG",
+                "id":205
+            },
+            "songs":[
+                105
+            ],
+            "genre": [
+                "rap/hip-hop"
             ]
         }
     ]
