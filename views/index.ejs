@@ -13,6 +13,21 @@
   <body>
       
     <audio id="audioPlayer"></audio>
+    
+    <div id="context" class="context">
+        <div class="related-image">
+            <img class="artwork" src="img/art/fakefriends-sigrid.jpg">
+        </div>
+        <div class="context-menu">
+            <h2>Fake Friends - Sigrid</h2>
+            <ul class="media">
+                <li><div>Save</div></li>
+                <li><div>Download</div></li>
+                <li><div>Go to...</div></li>
+                <li><div>Add to...</div></li>
+            </ul>
+        </div>
+    </div>
       
     <section id="fullPlayer" class="full-player">
         <div class="topbar">
@@ -67,6 +82,15 @@
             <button data-select="library" class="icon"><img src="img/icons/collection.svg"><div class="active-marker"></div></button>
         </div>
         <div id="miniPlayer" class="mini-player">
+            <div id="miniInfo" class="mini-info">
+                <!-- js populate -->
+            </div>
+            <div class="song-controls">
+                <button class="icon"><img src="img/icons/prev.svg"></button>
+                <button class="icon"><img src="img/icons/next.svg"></button>
+                <button class="icon" data-control="pause"><img src="img/icons/pause.svg"></button>
+            </div>
+            <div id="durationBar" class="duration-bar"></div>
         </div>
     </nav>
     

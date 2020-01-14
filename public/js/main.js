@@ -2,6 +2,8 @@ let songs;
 let artists;
 let releases;
 let audioPlayback;
+const player = document.getElementById("audioPlayer");
+player.controls = false;
 
 document.addEventListener("DOMContentLoaded", _ => {
     
@@ -19,7 +21,7 @@ const init =_=> {
    switchView(0);
    populateFeed("recent");
    //put something in mini player, but should build off of user data and what they last had playing
-   document.getElementById("miniPlayer").innerHTML = generateMini(songs.filter(song => song.id == 101)[0]);
+   document.getElementById("miniInfo").innerHTML = generateMini(songs.filter(song => song.id == 101)[0]);
 }
 
 //all click events
@@ -50,9 +52,29 @@ document.addEventListener("click", e => {
       e.target.classList.add("active");
    }
    
+   if (e.target.dataset.control) {
+      controlAudio(e.target.dataset.control, e.target);
+   }
+   
    console.log(e.target);
    
 });
+
+if (document.addEventListener) {
+   document.addEventListener('contextmenu', function(e) {
+     
+      if (e.target.parentNode.classList.contains("media-entry-large")) {
+         document.getElementById("context").classList.add("active");
+      }
+      
+      
+     e.preventDefault();
+   }, false);
+ } else {
+   document.attachEvent('oncontextmenu', function() {
+     window.event.returnValue = false;
+   });
+ }
 
 document.getElementById("feedElem").addEventListener("click", e => {
    //this is stupid
@@ -77,33 +99,59 @@ const songRequest = id => {
    set = set[0];
    
    //set mini player
-   document.getElementById("miniPlayer").innerHTML = generateMini(set);
+   document.getElementById("miniInfo").innerHTML = generateMini(set);
    //set audio source
-   document.getElementById("audioPlayer").setAttribute("src", `audio/${set.artist.slug}/${set.group.slug}/${id}.mp3`);
+   player.setAttribute("src", `audio/${set.artist.slug}/${set.group.slug}/${id}.mp3`);
    //play audio
-   document.getElementById("audioPlayer").play();
-   audioPlayback = setInterval(() => {animDuration(document.getElementById("audioPlayer"))}, 200);
+   player.play();
+   audioPlayback = setInterval(() => {animDuration(player)}, 200);
+}
+
+const controlAudio = (cmd, evt) => {
+   //cmd is the control requested; play, pause, next, back, etc
+   //evt is event.target
+   if (cmd === "play" || cmd === "pause") {
+      //toggle play/pause of audio
+      if (!player.paused) {
+         player.pause();
+         evt.innerHTML = `<img src="img/icons/play.svg">`;
+         evt.dataset.control = "play";
+      }
+      else {
+         player.play();
+         evt.innerHTML = `<img src="img/icons/pause.svg">`;
+         evt.dataset.control = "pause";
+      }
+   }
+   else if (cmd === "prev") {
+      //toggle prev song in queue
+   }
+   else if (cmd === "next") {
+      //toggle next song in queue
+   }
 }
 
 const animDuration = audElm => {
    
    const duraBar = document.getElementById("durationBar");
-   console.log(duraBar.style.width);
-   console.log(`${audElm.currentTime / audElm.duration}%`);
    
-   if (audElm.currentTime / audElm.duration) {
+   if ((audElm.currentTime / audElm.duration) && !player.paused) {
+      console.log("true");
+      
       duraBar.style.width = `${(audElm.currentTime / audElm.duration)*100}%`;
    }
    
 }
 
 const switchView = select => {
+   //select is an int that dictates which page to show; 0=feed, 1=library
    let obj = {
       title: "Feed",
       options: [
          "Recent", "New", "Discover"
       ]
    }
+   
    document.getElementById("navHead").innerHTML = populateView(obj);
 }
 
@@ -170,19 +218,11 @@ const generateFeed = dataArr => {
 
 const generateMini = data => {
    
-   console.log(data);
-   
    return (`
       <div class="song-snapshot" style="background-image: url(../img/art/${data.artwork}.jpg)"></div>
       <div class="song-info">
          <h5>${data.artist.title}</h5>
          <h4 class="secondary">${data.title}</h4>
       </div>
-      <div class="song-controls">
-         <button class="icon"><img src="img/icons/prev.svg"></button>
-         <button class="icon"><img src="img/icons/next.svg"></button>
-         <button class="icon"><img src="img/icons/pause.svg"></button>
-      </div>
-      <div id="durationBar" class="duration-bar"></div>
    `)
 }

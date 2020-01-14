@@ -42,7 +42,8 @@
     --corner-xl: 1em;
     
     /* z-index */
-    --z-max: 1000;
+    --z-context: 1000;
+    --z-onmenu: 201;
     --z-player: 200;
     --z-menu: 150;
     --z-dock: 100;
@@ -216,12 +217,12 @@ nav.dock .main-nav img {
 nav.dock .mini-player {
     background-color: var(--colour-darkpurple);
     padding: calc(var(--tight-padding) / 1.5);
+    padding-top: 0.55em;
     border-radius: var(--corner-large);
     display: grid;
-    grid-template-columns: min-content max-content auto;
+    grid-template-columns: min-content auto;
     align-items: center;
-    justify-items: center;
-    grid-gap: calc( var(--gap) / 2);
+    gap: calc( var(--gap) / 2);
     --colour-text: white;
     position: relative;
     overflow: hidden;
@@ -233,10 +234,21 @@ nav.dock .mini-player .icon {
 nav.dock .mini-player > * {
     pointer-events: none;
 }
+
+nav.dock .mini-player .mini-info {
+    display: grid;
+    grid-template-columns: min-content max-content;
+    gap: inherit;
+    align-items: center;
+    height: 100%;
+}
+nav.dock .mini-player .mini-info .song-info {
+    padding-top: 0.3em;
+}
+
 nav.dock .mini-player .song-snapshot {
     width: 2em;
     height: 100%;
-    background-image: url('../img/art/fakefriends-sigrid.jpg');
     background-size: 4em;
     background-position: center;
     border-radius: var(--corner-medium);
@@ -401,6 +413,59 @@ section.full-player .player .player-timeline .duration-bar {
 section.full-player .player .player-timeline :last-child {
     justify-self: right;
 }
+
+/* ________________CONTEXT MENU__________________ */
+
+div.context {
+    width:100%;
+    height: 100vh;
+    position: fixed;
+    top:0;
+    z-index: var(--z-context);
+    backdrop-filter: blur(1em);
+    padding: calc(var(--padding) * 1.5);
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0);
+    transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+}
+div.context.active {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+}
+
+div.context .related-image img {
+    width: 100%;
+    border-radius: var(--corner-large);
+}
+
+div.context .context-menu {
+    background-color: var(--colour-white);
+    border-radius: var(--corner-large);
+    width: 100%;
+    height: auto;
+    padding: var(--tight-padding);
+    max-width: 22em;
+    margin: 0 auto;
+}
+div.context .context-menu ul {
+    list-style: none;
+    font: var(--light) 1.26em/var(--linespace) var(--font);
+}
+div.context .context-menu ul li {
+    height: 2.2em;
+    border-bottom: 0.5px rgba(0,0,0,0.1) solid;
+}
+div.context .context-menu ul li:last-child {
+    border-bottom: none;
+}
+div.context .context-menu ul li div {
+    height: 100%;
+    display: grid;
+    align-items: center;
+}
+
 /* ________________TOPBAR__________________ */
 
 section.topbar {
@@ -422,7 +487,7 @@ section.topbar .menu-btn img {
 }
 section.topbar .menu-btn button.active {
     transform: rotate(225deg);
-    z-index: var(--z-max);
+    z-index: var(--z-onmenu);
     position: relative;
 }
 section.topbar .menu-btn button.active img {
