@@ -144,6 +144,17 @@ button.icon.special img {
     filter: invert(1);
 }
 
+button.quickshot {
+    display: grid;
+    grid-template-rows: auto min-content;
+}
+button.quickshot .circle {
+    width: 3.5em;
+    height: 3.5em;
+    background-color: var(--colour-lavender);
+    border-radius: var(--round);
+}
+
 /* ________________INPUTS__________________ */
 
 input.search-bar {
@@ -423,11 +434,14 @@ div.context {
     top:0;
     z-index: var(--z-context);
     backdrop-filter: blur(1em);
+    background-color: rgba(255,255,255,0.6);
     padding: calc(var(--padding) * 1.5);
     opacity: 0;
     visibility: hidden;
     transform: scale(0);
     transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+    display: grid;
+    align-items: center;
 }
 div.context.active {
     opacity: 1;
@@ -435,35 +449,60 @@ div.context.active {
     transform: scale(1);
 }
 
+div.context .related-image {
+    display: grid;
+    grid-template-columns: 3em auto;
+    gap: var(--gap);
+    align-items: center;
+}
 div.context .related-image img {
     width: 100%;
     border-radius: var(--corner-large);
+    display: block;
 }
 
 div.context .context-menu {
     background-color: var(--colour-white);
-    border-radius: var(--corner-large);
+    border-radius: var(--corner-xl);
     width: 100%;
     height: auto;
     padding: var(--tight-padding);
     max-width: 22em;
     margin: 0 auto;
+    display: grid;
+    gap: var(--gap);
 }
 div.context .context-menu ul {
     list-style: none;
-    font: var(--light) 1.26em/var(--linespace) var(--font);
 }
 div.context .context-menu ul li {
-    height: 2.2em;
+    height: 2.8em;
     border-bottom: 0.5px rgba(0,0,0,0.1) solid;
 }
 div.context .context-menu ul li:last-child {
-    border-bottom: none;
+    /* border-bottom: none; */
 }
 div.context .context-menu ul li div {
     height: 100%;
     display: grid;
     align-items: center;
+}
+
+div.context-menu .add-to-playlist {
+    overflow: hidden;
+    margin-right: calc(var(--gap) * -1);
+}
+div.context .playlist-select {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    overflow-x: auto;
+}
+div.context .playlist-select .quickshot {
+    margin-right: var(--gap);
+}
+div.context .playlist-select .quickshot:last-child {
+    margin-right: 0;
 }
 
 /* ________________TOPBAR__________________ */
