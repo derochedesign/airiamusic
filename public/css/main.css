@@ -30,6 +30,8 @@
     --padding: 2.4em;
     --toppadding: 2em;
     
+    --quickshot-size: 3.8em;
+    
     --max-width: 70rem;
     
     --shadow: 0 0 10px 1px rgba(0,0,0,0.3);
@@ -147,12 +149,41 @@ button.icon.special img {
 button.quickshot {
     display: grid;
     grid-template-rows: auto min-content;
+    width: var(--quickshot-size);
 }
-button.quickshot .circle {
-    width: 3.5em;
-    height: 3.5em;
+button.quickshot .shot {
+    width: var(--quickshot-size);
+    height: var(--quickshot-size);
     background-color: var(--colour-lavender);
-    border-radius: var(--round);
+    border-radius: var(--corner-xl);
+    padding: calc(var(--tight-padding) / 3);
+}
+button.quickshot .shot img {
+    width: 100%;
+    opacity: 0.8;
+    filter: invert(1);
+}
+button.quickshot h4 {
+    padding-top: calc(var(--padding) / 6);
+}
+button.quickshot .label {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+}
+.quickshot-row {
+    overflow: hidden;
+    margin-right: calc(var(--gap) * -1);
+}
+.quickshot-entries {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: calc(var(--gap) / 2);
+}
+.quickshot-entries .quickshot {
+    margin-right: calc(var(--padding) / 1.8);
 }
 
 /* ________________INPUTS__________________ */
@@ -227,8 +258,7 @@ nav.dock .main-nav img {
 
 nav.dock .mini-player {
     background-color: var(--colour-darkpurple);
-    padding: calc(var(--tight-padding) / 1.5);
-    padding-top: 0.55em;
+    padding: calc(var(--tight-padding) / 1.2);
     border-radius: var(--corner-large);
     display: grid;
     grid-template-columns: min-content auto;
@@ -439,13 +469,16 @@ div.context {
     opacity: 0;
     visibility: hidden;
     transform: scale(0);
-    transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+    transition: opacity 0.3s cubic-bezier(0.77, 0, 0.175, 1);
     display: grid;
     align-items: center;
 }
 div.context.active {
     opacity: 1;
     visibility: visible;
+    transform: scale(1);
+}
+div.context.active .context-menu {
     transform: scale(1);
 }
 
@@ -471,6 +504,8 @@ div.context .context-menu {
     margin: 0 auto;
     display: grid;
     gap: var(--gap);
+    transform: scale(0);
+    transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
 }
 div.context .context-menu ul {
     list-style: none;
@@ -486,23 +521,6 @@ div.context .context-menu ul li div {
     height: 100%;
     display: grid;
     align-items: center;
-}
-
-div.context-menu .add-to-playlist {
-    overflow: hidden;
-    margin-right: calc(var(--gap) * -1);
-}
-div.context .playlist-select {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    overflow-x: auto;
-}
-div.context .playlist-select .quickshot {
-    margin-right: var(--gap);
-}
-div.context .playlist-select .quickshot:last-child {
-    margin-right: 0;
 }
 
 /* ________________TOPBAR__________________ */

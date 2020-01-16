@@ -56,6 +56,10 @@ document.addEventListener("click", e => {
       controlAudio(e.target.dataset.control, e.target);
    }
    
+   if (e.target.matches("#context")) {
+      document.getElementById("context").classList.toggle("active");
+   }
+   
    console.log(e.target);
    
 });
@@ -64,9 +68,8 @@ if (document.addEventListener) {
    document.addEventListener('contextmenu', function(e) {
      
       if (e.target.parentNode.classList.contains("media-entry-large")) {
-         document.getElementById("context").classList.add("active");
+         document.getElementById("context").classList.toggle("active");
       }
-      
       
      e.preventDefault();
    }, false);
