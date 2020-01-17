@@ -137,6 +137,29 @@
             "tags": [
                 "upbeat","emotional"
             ]
+        },
+        {
+            "id":107,
+            "title":"circle the drain",
+            "slug":"circlethedrain",
+            "artist": {
+                "title":"Soccer Mommy",
+                "slug":"soccermommy",
+                "id":206
+            },
+            "releaseDate":"2020-01-13",
+            "group": {
+                "type":"single",
+                "title":"circle the drain",
+                "slug":"circlethedrain",
+                "id":306
+            },
+            "genre": [
+                "indie","indie-rock", "alternative"
+            ],
+            "tags": [
+                "upbeat","emotional"
+            ]
         }
     ],
     "artists": [
@@ -208,6 +231,20 @@
             "linkout":"https://www.deroche.design/",
             "genre": [
                 "rap/hip-hop", "alternative"
+            ]
+        },
+        {
+            "id":206,
+            "title": "RG",
+            "slug":"rg",
+            "bio": "Soccer Mommy is a mom.",
+            "releases": [
+                306
+            ],
+            "startDate":2015,
+            "linkout":"https://soccermommyband.com/",
+            "genre": [
+                "indie-rock", "alternative", "indie"
             ]
         }
     ],
@@ -295,6 +332,23 @@
             ],
             "genre": [
                 "rap/hip-hop"
+            ]
+        },
+        {
+            "id":306,
+            "title": "circle the drain",
+            "slug": "circlethedrain-soccermommy",
+            "date": "2020-01-13",
+            "type": "single",
+            "artist": {
+                "title":"Soccer Mommy",
+                "id":206
+            },
+            "songs":[
+                106
+            ],
+            "genre": [
+                "indie", "indie-rock"
             ]
         }
     ]

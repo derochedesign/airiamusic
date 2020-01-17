@@ -28,11 +28,9 @@ const init =_=> {
 document.addEventListener("click", e => {
    
    //if matches
-   if (e.target.matches("#collBtn")) {
-      document.getElementById("fullPlayer").classList.remove("active");
-   }
-   if (e.target.matches("#miniPlayer")) {
-      document.getElementById("fullPlayer").classList.add("active");
+   if (e.target.matches("#collBtn") || e.target.matches("#miniPlayer")) {
+      document.getElementById("fullPlayer").classList.toggle("active");
+      document.getElementById("miniPlayer").classList.toggle("active");
    }
    //local nav tabs
    if (e.target.parentNode.matches(".local-nav")) {
@@ -53,7 +51,7 @@ document.addEventListener("click", e => {
    }
    
    if (e.target.dataset.control) {
-      controlAudio(e.target.dataset.control, e.target);
+      controlAudio(e.target.dataset.control);
    }
    
    if (e.target.matches("#context")) {
@@ -70,6 +68,7 @@ if (document.addEventListener) {
       if (e.target.parentNode.classList.contains("media-entry-large")) {
          document.getElementById("context").classList.toggle("active");
       }
+      populateContext(e.target);
       
      e.preventDefault();
    }, false);
@@ -97,33 +96,54 @@ document.getElementById("feedElem").addEventListener("click", e => {
    
 });
 
-const songRequest = id => {
+const getMediaInfo = id => {
    let set = songs.filter(song => song.id == id)
+   
+   if (set.length === 0) {
+      set = artists.filter(song => song.id == id)
+   }
+   if (set.length === 0) {
+      set = releases.filter(song => song.id == id)
+   }
+   if (set.length === 0) {
+      return null;
+   }
    set = set[0];
+   return set;
+}
+
+const songRequest = id => {
+   let set = getMediaInfo(id);
    
    //set mini player
    document.getElementById("miniInfo").innerHTML = generateMini(set);
    //set audio source
    player.setAttribute("src", `audio/${set.artist.slug}/${set.group.slug}/${id}.mp3`);
    //play audio
-   player.play();
-   audioPlayback = setInterval(() => {animDuration(player)}, 200);
+   controlAudio("toggle-play");
+   audioPlayback = setInterval(() => {animDuration(player)}, 400);
 }
 
-const controlAudio = (cmd, evt) => {
+const controlAudio = (cmd) => {
    //cmd is the control requested; play, pause, next, back, etc
    //evt is event.target
-   if (cmd === "play" || cmd === "pause") {
+   if (cmd === "toggle-play") {
       //toggle play/pause of audio
+      const evt = document.querySelectorAll(`[data-control="toggle-play"]`);
+      
       if (!player.paused) {
          player.pause();
-         evt.innerHTML = `<img src="img/icons/play.svg">`;
-         evt.dataset.control = "play";
+  
+         Array.from(evt).map(ev => {
+            ev.innerHTML = `<img src="img/icons/play.svg">`;
+         });
       }
       else {
          player.play();
-         evt.innerHTML = `<img src="img/icons/pause.svg">`;
-         evt.dataset.control = "pause";
+         
+         Array.from(evt).map(ev => {
+            ev.innerHTML = `<img src="img/icons/pause.svg">`;
+         });
       }
    }
    else if (cmd === "prev") {
@@ -136,12 +156,19 @@ const controlAudio = (cmd, evt) => {
 
 const animDuration = audElm => {
    
-   const duraBar = document.getElementById("durationBar");
+   const duraBar = document.getElementsByClassName("duration-bar");
+   const tempTime = document.getElementById("tempTime");
    
    if ((audElm.currentTime / audElm.duration) && !player.paused) {
-      console.log("true");
+      console.log("audio playing");
       
-      duraBar.style.width = `${(audElm.currentTime / audElm.duration)*100}%`;
+      Array.from(duraBar).map(bar => {
+         bar.style.width = `${(audElm.currentTime / audElm.duration)*100}%`;
+      });
+      //tempTime.innerHTML = Math.round(player.currentTime * 100) / 100;
+      const secs = Math.ceil(player.currentTime - (Math.floor(player.currentTime / 60)) * 60);
+      const mins = Math.floor(player.currentTime / 60);
+      tempTime.innerHTML = `${ mins }:${(secs < 10) ? ("0") : ""}${ secs }`;
    }
    
 }
@@ -194,6 +221,19 @@ const populateFeed = select => {
    feedElem.innerHTML = generateFeed(orderedArr);
    
 }
+
+const populateContext = evt => {
+   
+   const data = getMediaInfo(Number(evt.parentNode.dataset.id));
+   
+   document.getElementById("contextInfo").innerHTML =`
+   <img class="artwork" src="img/art/${data.artwork}.jpg">
+   <div>
+      <h5>${data.artist.title}</h5>
+      <h4 class="secondary">${data.title}</h4>
+   </div>
+   `;
+};
 
 const generateFeed = dataArr => {
    //get artwork slug from release

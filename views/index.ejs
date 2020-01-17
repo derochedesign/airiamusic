@@ -16,12 +16,7 @@
     
     <div id="context" class="context">
         <div class="context-menu">
-            <div class="related-image">
-                <img class="artwork" src="img/art/fakefriends-sigrid.jpg">
-                <div>
-                    <h5>Sigrid</h5>
-                    <h4 class="secondary">Fake Friends</h4>
-                </div>
+            <div id="contextInfo" class="related-image">
             </div>
             
             <ul class="media">
@@ -89,7 +84,7 @@
         <div class="player">
             <div class="player-controls">
                 <div>
-                    <button class="button icon"><img src="img/icons/play.svg"></button>
+                    <button class="button icon" data-control="toggle-play"><img src="img/icons/play.svg"></button>
                     <button class="button icon"><img src="img/icons/save.svg"></button>
                 </div>
                 <div>
@@ -99,7 +94,7 @@
             </div>
             <div class="player-timeline">
                 <div class="time-bar"><div class="duration-bar"></div></div>
-                <h5>1:32</h5>
+                <h5 id="tempTime">1:32</h5>
                 <h5>3:03</h5>
             </div>
         </div>
@@ -120,7 +115,7 @@
             <div class="song-controls">
                 <button class="icon"><img src="img/icons/prev.svg"></button>
                 <button class="icon"><img src="img/icons/next.svg"></button>
-                <button class="icon" data-control="pause"><img src="img/icons/pause.svg"></button>
+                <button class="icon" data-control="toggle-play"><img src="img/icons/play.svg"></button>
             </div>
             <div id="durationBar" class="duration-bar"></div>
         </div>
