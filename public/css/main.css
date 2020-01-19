@@ -151,12 +151,20 @@ button.quickshot {
     grid-template-rows: auto min-content;
     width: var(--quickshot-size);
 }
+
 button.quickshot .shot {
     width: var(--quickshot-size);
     height: var(--quickshot-size);
     background-color: var(--colour-lavender);
     border-radius: var(--corner-xl);
     padding: calc(var(--tight-padding) / 3);
+    transition: transform 0.4s ease;
+}
+button.quickshot:hover .shot {
+    transform: scale(0.8);
+}
+button.quickshot:first-child .shot {
+    padding: calc(var(--tight-padding) / 1.6);
 }
 button.quickshot .shot img {
     width: 100%;
@@ -267,7 +275,7 @@ nav.dock .mini-player {
     --colour-text: white;
     position: relative;
     overflow: hidden;
-    transition: 0.7s cubic-bezier(0.77, 0, 0.175, 1);
+    transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
 }
 nav.dock .mini-player.active {
     transform: scaleY(15) scalex(1.5);
@@ -278,11 +286,13 @@ nav.dock .mini-player.active {
 }
 nav.dock .mini-player * {
     transform: translateX(0);
-    transition: 1s cubic-bezier(1, 0, 0, 1);
+    transition: transform 1s cubic-bezier(1, 0, 0, 1), opacity 1s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    opacity: 1;
 }
 nav.dock .mini-player.active * {
-    transition: 0.4s ease;
-    transform: translateX(10em);
+    transition: transform 0.4s ease, opacity 0.4s linear;
+    transform: translateX(50vw);
+    opacity: 0;
 }
 nav.dock .mini-player .icon {
     filter: invert(1);
@@ -328,6 +338,7 @@ nav.dock .mini-player .duration-bar {
     z-index: 1;
     width: 0%;
     justify-self: left;
+    transform: unset;
 }
 
 /* ________________FULL PLAYER__________________ */
@@ -351,7 +362,7 @@ section.full-player {
     transform: scale(0);
 }
 section.full-player.active {
-    transition: 1s cubic-bezier(0.77, 0, 0.175, 1);
+    transition: 0.7s cubic-bezier(0.77, 0, 0.175, 1);
     opacity: 1;
     transform: scale(1);
 }
@@ -482,22 +493,22 @@ div.context {
     width:100%;
     height: 100vh;
     position: fixed;
-    top:0;
+    top: 0;
     z-index: var(--z-context);
     backdrop-filter: blur(1em);
     background-color: rgba(255,255,255,0.6);
     padding: calc(var(--padding) * 1.5);
     opacity: 0;
-    visibility: hidden;
-    transform: scale(0);
+    /* visibility: hidden; */
     transition: opacity 0.3s cubic-bezier(0.77, 0, 0.175, 1);
     display: grid;
     align-items: center;
+    pointer-events: none;
 }
 div.context.active {
     opacity: 1;
-    visibility: visible;
-    transform: scale(1);
+    /* visibility: visible; */
+    pointer-events: all;
 }
 div.context.active .context-menu {
     transform: scale(1);
@@ -534,9 +545,14 @@ div.context .context-menu ul {
 div.context .context-menu ul li {
     height: 2.8em;
     border-bottom: 0.5px rgba(0,0,0,0.1) solid;
+    padding: 0 var(--tight-padding);
+    margin: 0 calc( var(--tight-padding) * -1);
 }
 div.context .context-menu ul li:last-child {
     /* border-bottom: none; */
+}
+div.context .context-menu ul li:hover, div.context .context-menu ul li:focus {
+    background-color: var(--colour-lavender);
 }
 div.context .context-menu ul li div {
     height: 100%;
