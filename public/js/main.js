@@ -1,6 +1,7 @@
 let songs;
 let artists;
 let releases;
+let userData;
 let audioPlayback;
 const player = document.getElementById("audioPlayer");
 player.controls = false;
@@ -8,6 +9,9 @@ player.controls = false;
 document.addEventListener("DOMContentLoaded", _ => {
     
    //get data
+   $.getJSON('../data/user.json', function(result) { 
+         userData = result;
+   });
    $.getJSON('../data/all-music.json', function(result) { 
           songs = result.songs;
           artists = result.artists;
@@ -19,7 +23,7 @@ document.addEventListener("DOMContentLoaded", _ => {
 
 const init =_=> {
    switchView(0);
-   populateFeed("recent");
+   populateMain("recent");
    //put something in mini player, but should build off of user data and what they last had playing
    document.getElementById("miniInfo").innerHTML = generateMini(songs.filter(song => song.id == 101)[0]);
 }
@@ -34,7 +38,7 @@ document.addEventListener("click", e => {
    }
    //local nav tabs
    if (e.target.parentNode.matches(".local-nav")) {
-      populateFeed(e.target.dataset.select);
+      populateMain(e.target.dataset.select);
       [...e.target.parentNode.children].map(elem => elem.classList.remove("active") );
       e.target.classList.add("active");
    }
@@ -175,28 +179,36 @@ const animDuration = audElm => {
 
 const switchView = select => {
    //select is an int that dictates which page to show; 0=feed, 1=library
-   let obj = {
+   const data = [{
       title: "Feed",
       options: [
-         "Recent", "New", "Discover"
+         "recent", "new", "discover"
       ]
-   }
+   },
+   {
+      title: "Library",
+      options: [
+         "playlists", "category"
+      ]
+   }];
    
-   document.getElementById("navHead").innerHTML = populateView(obj);
+   document.getElementById("navHead").innerHTML = populateView(data[Number(select)]);
+   populateMain(data[Number(select)].options[0]);
 }
 
 const populateView = data => {
+   
    return (
       `
       <h1>${data.title}</h1>
       <div class="local-nav">
-         ${data.options.map((opt,i) => `<h4 data-select="${opt.toLowerCase()}" class="${(i == 0 ? "active" : null)}">${opt}<div class="active-marker"></div></h4>`).join('')}
+         ${data.options.map((opt,i) => `<h4 data-select="${opt.toLowerCase()}" class="${(i == 0 ? "active" : "")}">${opt}<div class="active-marker"></div></h4>`).join('')}
       </div>
       `
    )
 }
 
-const populateFeed = select => {
+const populateMain = select => {
    console.log(select);
    
    const feedElem = document.getElementById("feedElem");
@@ -217,6 +229,12 @@ const populateFeed = select => {
       //some light ml recommendation system
       orderedArr = [...songs];
    }
+   else if (select == "playlists") {
+      orderedArr = Array.from(userData.playlists);
+      feedElem.innerHTML = generateLibrary(orderedArr);
+      return;
+      
+   }
    
    feedElem.innerHTML = generateFeed(orderedArr);
    
@@ -225,6 +243,7 @@ const populateFeed = select => {
 const populateContext = evt => {
    
    const data = getMediaInfo(Number(evt.parentNode.dataset.id));
+   const playlistData = Array.from(userData.playlists);
    
    document.getElementById("contextInfo").innerHTML =`
    <img class="artwork" src="img/art/${data.artwork}.jpg">
@@ -233,6 +252,23 @@ const populateContext = evt => {
       <h4 class="secondary">${data.title}</h4>
    </div>
    `;
+   
+   document.getElementById("contextPlaylists").innerHTML =`
+   <button class="quickshot playlist">
+      <div class="shot"><h1 class="thumb">+</h1></div>
+      <div class="label"><h4>Create</h4></div>
+   </button>
+   ${playlistData.map(pla => `
+   <button class="quickshot playlist">
+      <div class="shot">
+         <h1 class="thumb">${(pla.name).slice(0,2)}</h1>
+      </div>
+      <div class="label">
+         <h4>${pla.name}</h4>
+      </div>
+   </button>
+   `).join("")}
+   `
 };
 
 const generateFeed = dataArr => {
@@ -256,6 +292,14 @@ const generateFeed = dataArr => {
       ).join('')}
       
       `
+   )
+}
+
+const generateLibrary = dataArr => {
+   console.log(dataArr);
+   
+   return (
+      `<div>${dataArr.map(dat => `<div>${dat.name}</div>`).join('')}</div>`
    )
 }
 

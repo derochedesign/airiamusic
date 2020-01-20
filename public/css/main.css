@@ -9,6 +9,7 @@
     --colour-text: black;
     
     --colour-lavender:#DED9ED;
+    --colour-light-lavender: #F7EEFF;
     --colour-darkpurple: #110B20;
     --colour-darkfont: #281A36;
     --colour-grad-purple: #D55BFF;
@@ -158,18 +159,22 @@ button.quickshot .shot {
     background-color: var(--colour-lavender);
     border-radius: var(--corner-xl);
     padding: calc(var(--tight-padding) / 3);
-    transition: transform 0.4s ease;
+    transition: transform 0.1s ease;
+    display: grid;
+    align-items: center;
+    text-align: center;
 }
 button.quickshot:hover .shot {
+    transition: transform 0.3s ease;
     transform: scale(0.8);
 }
 button.quickshot:first-child .shot {
     padding: calc(var(--tight-padding) / 1.6);
 }
-button.quickshot .shot img {
-    width: 100%;
-    opacity: 0.8;
-    filter: invert(1);
+button.quickshot .shot h1.thumb {
+    color: var(--colour-light-lavender);
+    line-height: 0;
+    font-size: 2em;
 }
 button.quickshot h4 {
     padding-top: calc(var(--padding) / 6);
@@ -286,7 +291,7 @@ nav.dock .mini-player.active {
 }
 nav.dock .mini-player * {
     transform: translateX(0);
-    transition: transform 1s cubic-bezier(1, 0, 0, 1), opacity 1s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    transition: transform 0.7s cubic-bezier(1, 0, 0, 1), opacity 0.7s cubic-bezier(0.55, 0.055, 0.675, 0.19);
     opacity: 1;
 }
 nav.dock .mini-player.active * {
@@ -547,6 +552,8 @@ div.context .context-menu ul li {
     border-bottom: 0.5px rgba(0,0,0,0.1) solid;
     padding: 0 var(--tight-padding);
     margin: 0 calc( var(--tight-padding) * -1);
+    background-color: transparent;
+    transition: background-color 0.2s ease;
 }
 div.context .context-menu ul li:last-child {
     /* border-bottom: none; */

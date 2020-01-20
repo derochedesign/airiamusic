@@ -8,7 +8,7 @@
     <title>airia</title>
     <link rel="icon" href="img/favicon.png">
     <link rel="stylesheet" href="css/main.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
   </head>
   <body>
       
@@ -26,35 +26,7 @@
             </ul>
             <h4>Playlists</h4>
             <div class="quickshot-row">
-                <div class="quickshot-entries">
-                    <button class="quickshot playlist">
-                        <div class="shot"><img src="img/icons/add.svg" alt="test playlist icon"></div>
-                        <div class="label"><h4>Create</h4></div>
-                    </button>
-                    <button class="quickshot playlist">
-                        <div class="shot"><img src="img/icons/collection.svg" alt="test playlist icon"></div>
-                        <div class="label"><h4>Mellow</h4></div>
-                    </button>
-                    <button class="quickshot playlist">
-                        <div class="shot"><img src="img/icons/collection.svg" alt="test playlist icon"></div>
-                        <div class="label"><h4>litty!</h4></div>
-                    </button>
-                    <button class="quickshot playlist">
-                        <div class="shot"><img src="img/icons/collection.svg" alt="test playlist icon"></div>
-                        <div class="label"><h4>dope af :p supa hottie</h4></div>
-                    </button>
-                    <button class="quickshot playlist">
-                        <div class="shot"><img src="img/icons/collection.svg" alt="test playlist icon"></div>
-                        <div class="label"><h4>:3 x3</h4></div>
-                    </button>
-                    <button class="quickshot playlist">
-                        <div class="shot"><img src="img/icons/collection.svg" alt="test playlist icon"></div>
-                        <div class="label"><h4>Gooten</h4></div>
-                    </button>
-                    <button class="quickshot playlist">
-                        <div class="shot"><img src="img/icons/collection.svg" alt="test playlist icon"></div>
-                        <div class="label"><h4>chooly</h4></div>
-                    </button>
+                <div id="contextPlaylists" class="quickshot-entries">
                 </div>
             </div>
         </div>
@@ -109,8 +81,8 @@
       
     <nav class="dock">
         <div class="main-nav">
-            <button data-select="feed" class="icon active"><img src="img/icons/feed.svg"><div class="active-marker"></div></button>
-            <button data-select="library" class="icon"><img src="img/icons/collection.svg"><div class="active-marker"></div></button>
+            <button data-select="0" class="icon active"><img src="img/icons/feed.svg"><div class="active-marker"></div></button>
+            <button data-select="1" class="icon"><img src="img/icons/collection.svg"><div class="active-marker"></div></button>
         </div>
         <div id="miniPlayer" class="mini-player">
             <div id="miniInfo" class="mini-info">
@@ -154,5 +126,6 @@
     </main>
     
     <script src="js/main.js" charset="utf-8"></script>
+    <script src="js/jquery.min.js" charset="utf-8"></script>
   </body>
 </html>

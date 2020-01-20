@@ -1,0 +1,30 @@
+{
+    "id":1001,
+    "name": "Aaron DeRoche",
+    "following": [201, 206],
+    "saved": [103,105,106],
+    "downloaded": [103,105],
+    "playlists": [
+        {
+            "id":501,
+            "name":"v kewl :3",
+            "content": [
+                101,102,103
+            ]
+        },
+        {
+            "id":502,
+            "name":"chooly",
+            "content": [
+                103,104
+            ]
+        },
+        {
+            "id":503,
+            "name":"esketit",
+            "content": [
+                104,101,106,103
+            ]
+        }
+    ]
+}
