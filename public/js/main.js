@@ -32,20 +32,24 @@ player.controls = false;
 document.addEventListener("DOMContentLoaded", _ => {
     
    //get data
-   $.getJSON('../data/user.json', function(result) { 
-         userData = result;
+   $.when(
+      $.getJSON('../data/user.json', function(result) { 
+            userData = result;
+      }),
+      $.getJSON('../data/all-music.json', function(result) { 
+            songs = result.songs;
+            artists = result.artists;
+            releases = result.releases;
+      })
+   ).then(_=> {
+      init();
    });
-   $.getJSON('../data/all-music.json', function(result) { 
-          songs = result.songs;
-          artists = result.artists;
-          releases = result.releases;
-          init();
-   });
+   
    
 });
 
 const mc = new Hammer.Manager(document.getElementById("main"), {preventDefault: true});
-mc.add( new Hammer.Swipe({ direction: Hammer.DIRECTION_ALL}) );
+mc.add( new Hammer.Swipe() );
 
 const init =_=> {
    switchView(0);
@@ -59,20 +63,24 @@ mc.on("swipe", e => {
    
    if (e.direction === 4) {
       //right - decending
-      (pagePos > 0) && (pagePos--);
-      if (pagePos === 2) {
-         switchView(0);
+      if (pagePos > 0)  {
+         pagePos--;
+         if (pagePos === 2) {
+            switchView(0);
+         }
+         switchPage(mainPages[pagePos].name, null);
       }
    }
    else if (e.direction === 2) {
       //left - ascending
-      (pagePos < 4) && (pagePos++);
-      if (pagePos === 3) {
-         switchView(1);
+      if (pagePos < 4) {
+         pagePos++;
+         if (pagePos === 3) {
+            switchView(1);
+         }
+         switchPage(mainPages[pagePos].name, null);
       }
    }
-   
-   switchPage(mainPages[pagePos].name, null);
    
 });
 
@@ -275,9 +283,9 @@ const populateMain = select => {
    let orderedArr;
    
    if (select == "recent") {
-      //recent (needs a user data set to index)
-      //at users recently played in their data set and show it
-      orderedArr = [...songs];
+      //take the array of song id's from userData and get the entries in songs that match the id
+      const recentSongs = userData.recents.map(rec => (songs.filter(song => song.id == rec))).flat();
+      orderedArr = recentSongs;
    }
    else if (select == "new") {
       //new (from users followed artists)
