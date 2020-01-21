@@ -3,6 +3,29 @@ let artists;
 let releases;
 let userData;
 let audioPlayback;
+let pagePos = 0;
+const mainPages = [
+   {
+      name: "recent",
+      id: 0
+   },
+   {
+      name: "new",
+      id: 1
+   },
+   {
+      name: "discover",
+      id: 2
+   },
+   {
+      name: "playlists",
+      id: 3
+   },
+   {
+      name: "category",
+      id: 4
+   }
+];
 const player = document.getElementById("audioPlayer");
 player.controls = false;
 
@@ -21,12 +44,37 @@ document.addEventListener("DOMContentLoaded", _ => {
    
 });
 
+const mc = new Hammer.Manager(document.getElementById("main"), {preventDefault: true});
+mc.add( new Hammer.Swipe({ direction: Hammer.DIRECTION_ALL}) );
+
 const init =_=> {
    switchView(0);
-   populateMain("recent");
+   switchPage("recent", null);
    //put something in mini player, but should build off of user data and what they last had playing
    document.getElementById("miniInfo").innerHTML = generateMini(songs.filter(song => song.id == 101)[0]);
 }
+
+mc.on("swipe", e => {
+   console.log(e);
+   
+   if (e.direction === 4) {
+      //right - decending
+      (pagePos > 0) && (pagePos--);
+      if (pagePos === 2) {
+         switchView(0);
+      }
+   }
+   else if (e.direction === 2) {
+      //left - ascending
+      (pagePos < 4) && (pagePos++);
+      if (pagePos === 3) {
+         switchView(1);
+      }
+   }
+   
+   switchPage(mainPages[pagePos].name, null);
+   
+});
 
 //all click events
 document.addEventListener("click", e => {
@@ -38,9 +86,8 @@ document.addEventListener("click", e => {
    }
    //local nav tabs
    if (e.target.parentNode.matches(".local-nav")) {
-      populateMain(e.target.dataset.select);
-      [...e.target.parentNode.children].map(elem => elem.classList.remove("active") );
-      e.target.classList.add("active");
+      pagePos = mainPages.filter(page => (page.name == (e.target.dataset.select)))[0].id;
+      switchPage(e.target.dataset.select, e.target);
    }
    
    if (e.target.matches("#menuBtn")) {
@@ -177,6 +224,19 @@ const animDuration = audElm => {
    
 }
 
+const switchPage = (select, evt) => {
+   console.log(select);
+   console.log(pagePos);
+   populateMain(select);
+   [...document.getElementById("localNav").children].map(elem => elem.classList.remove("active") );
+   if (evt != null) {
+      evt.classList.add("active");
+   }
+   else {
+      document.querySelector(`[data-select="${select}"]`).classList.add("active");
+   }
+}
+
 const switchView = select => {
    //select is an int that dictates which page to show; 0=feed, 1=library
    const data = [{
@@ -193,15 +253,16 @@ const switchView = select => {
    }];
    
    document.getElementById("navHead").innerHTML = populateView(data[Number(select)]);
-   populateMain(data[Number(select)].options[0]);
+   switchPage(data[Number(select)].options[0], null);
 }
 
 const populateView = data => {
+   console.log("doing bad");
    
    return (
       `
       <h1>${data.title}</h1>
-      <div class="local-nav">
+      <div id="localNav" class="local-nav">
          ${data.options.map((opt,i) => `<h4 data-select="${opt.toLowerCase()}" class="${(i == 0 ? "active" : "")}">${opt}<div class="active-marker"></div></h4>`).join('')}
       </div>
       `
@@ -209,7 +270,6 @@ const populateView = data => {
 }
 
 const populateMain = select => {
-   console.log(select);
    
    const feedElem = document.getElementById("feedElem");
    let orderedArr;
@@ -237,6 +297,17 @@ const populateMain = select => {
    }
    
    feedElem.innerHTML = generateFeed(orderedArr);
+   feedElem.animate([
+      // keyframes
+      { transform: 'scale(0.9)',
+      opacity: 0 }, 
+      { transform: 'scale(1)',
+      opacity: 1 }
+    ], { 
+      // timing options
+      duration: 300,
+      easing: "cubic-bezier(0.215, 0.61, 0.355, 1)"
+    });
    
 }
 
@@ -273,6 +344,8 @@ const populateContext = evt => {
 
 const generateFeed = dataArr => {
    //get artwork slug from release
+   console.log(dataArr);
+   
    
    dataArr.map(dat => {
       dat.artwork = releases.filter(rel => rel.id == dat.group.id)[0].slug;

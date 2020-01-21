@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <meta name="theme-color" content="#ffffff"/>
-    
-    <title>airia</title>
-    <link rel="icon" href="img/favicon.png">
-    <link rel="stylesheet" href="css/main.css">
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
-  </head>
-  <body>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="theme-color" content="#ffffff"/>
+        
+        <title>airia</title>
+        <link rel="icon" href="img/favicon.png">
+        <link rel="stylesheet" href="css/main.css">
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+        <script src="js/hammer.min.js" charset="utf-8"></script>
+        <script src="js/jquery.min.js" charset="utf-8"></script>
+    </head>
+    <body>
       
     <audio id="audioPlayer"></audio>
     
@@ -97,7 +99,7 @@
         </div>
     </nav>
     
-    <main class="content">
+    <main id="main" class="content">
         <div class="feed">
             <section class="topbar">
                 <div class="menu-btn"><button id="menuBtn" class="icon"><img src="img/icons/menu.svg"></button></div>
@@ -126,6 +128,5 @@
     </main>
     
     <script src="js/main.js" charset="utf-8"></script>
-    <script src="js/jquery.min.js" charset="utf-8"></script>
   </body>
 </html>

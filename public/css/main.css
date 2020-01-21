@@ -672,6 +672,7 @@ section.nav-head .local-nav h4.active .active-marker {
 
 section.content-inner {
     overflow: auto;
+    touch-action: pan-y;
 }
 
 section.quick-action {
