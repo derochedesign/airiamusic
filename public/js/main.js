@@ -54,6 +54,7 @@ mc.add( new Hammer.Swipe() );
 const init =_=> {
    switchView(0);
    switchPage("recent", null);
+   populatePlayer(songs.filter(song => song.id == 101)[0]);
    //put something in mini player, but should build off of user data and what they last had playing
    document.getElementById("miniInfo").innerHTML = generateMini(songs.filter(song => song.id == 101)[0]);
 }
@@ -176,6 +177,8 @@ const songRequest = id => {
    
    //set mini player
    document.getElementById("miniInfo").innerHTML = generateMini(set);
+   //set full player
+   populatePlayer(set);
    //set audio source
    player.setAttribute("src", `audio/${set.artist.slug}/${set.group.slug}/${id}.mp3`);
    //play audio
@@ -285,6 +288,9 @@ const populateMain = select => {
    if (select == "recent") {
       //take the array of song id's from userData and get the entries in songs that match the id
       const recentSongs = userData.recents.map(rec => (songs.filter(song => song.id == rec))).flat();
+      console.log([...songs]);
+      console.log(recentSongs);
+      
       orderedArr = recentSongs;
    }
    else if (select == "new") {
@@ -304,7 +310,7 @@ const populateMain = select => {
       
    }
    
-   feedElem.innerHTML = generateFeed(orderedArr);
+   feedElem.innerHTML = generateFeed(orderedArr, select);
    feedElem.animate([
       // keyframes
       { transform: 'scale(0.9)',
@@ -350,7 +356,38 @@ const populateContext = evt => {
    `
 };
 
-const generateFeed = dataArr => {
+const populatePlayer = data => {
+   console.log(data);
+   
+   document.getElementById("playerInfo").innerHTML =`
+   <div class="topbar">
+      <button id="collBtn" class="button icon"><img src="img/icons/collapse.svg"></button>
+      <div class="song-info">
+         <h2>${data.artist.title}</h2>
+         <h1>${data.title}</h1>
+      </div>
+   </div>
+   <div class="song-art">
+      <img class="artwork" src="img/art/${data.artwork}.jpg">
+      <button class="button icon special variate-btn"><img src="img/icons/variate.svg"></button>
+   </div>
+
+   <div class="variation">
+      <div class="variate-info">
+         <h3>Excited-Tulip</h3>
+         <h4>Variation</h4>
+      </div>
+      <div class="variate-cells">
+         <div class="variate-cell"></div>
+         <div class="variate-cell"></div>
+         <div class="variate-cell"></div>
+         <div class="variate-cell"></div>
+      </div>
+   </div>
+   `;
+};
+
+const generateFeed = (dataArr, select) => {
    //get artwork slug from release
    console.log(dataArr);
    
@@ -362,16 +399,24 @@ const generateFeed = dataArr => {
    
    return (
       `
-      ${dataArr.map(dat => `
-      <div class="media-entry-large" data-id="${dat.id}">
-         <img src="img/art/${dat.artwork}.jpg">
-         <div>
-            <h5>${dat.artist.title}</h5>
-            <h4 class="secondary">${dat.title}</h4>
-         </div>
-      </div>`
-      ).join('')}
+      <section class="quick-action">
+         <button class="button icon special">
+            <img src="img/icons/shuffle.svg">
+         </button>
+         <h2>Shuffle ${select}</h2>
+      </section>
       
+      <section class="content-entries">
+         ${dataArr.map(dat => `
+         <div class="media-entry-large" data-id="${dat.id}">
+            <img src="img/art/${dat.artwork}.jpg">
+            <div>
+               <h5>${dat.artist.title}</h5>
+               <h4 class="secondary">${dat.title}</h4>
+            </div>
+         </div>`
+         ).join('')}
+      </section>
       `
    )
 }
