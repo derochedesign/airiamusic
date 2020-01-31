@@ -249,7 +249,7 @@ nav.dock .main-nav {
     transition: 0.3s ease;
 }
 
-nav.dock .main-nav button.icon.active{
+nav.dock .main-nav button.icon {
     position: relative;
 }
 
