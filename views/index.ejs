@@ -61,27 +61,9 @@
         <h1>airia</h1>
         <h3>A concept music app, which gives the listener a slightly different auditory experience each time they listen to a song.</h3>
     </section>
-      
-    <nav class="dock">
-        <div class="main-nav">
-            <button data-select="0" class="icon active"><img src="img/icons/feed.svg"><div class="active-marker"></div></button>
-            <button data-select="1" class="icon"><img src="img/icons/collection.svg"><div class="active-marker"></div></button>
-        </div>
-        <div id="miniPlayer" class="mini-player">
-            <div id="miniInfo" class="mini-info">
-                <!-- js populate -->
-            </div>
-            <div class="song-controls">
-                <button class="icon"><img src="img/icons/prev.svg"></button>
-                <button class="icon"><img src="img/icons/next.svg"></button>
-                <button class="icon" data-control="toggle-play"><img src="img/icons/play.svg"></button>
-            </div>
-            <div id="durationBar" class="duration-bar"></div>
-        </div>
-    </nav>
     
     <main id="main" class="content">
-        <div class="feed">
+        <div id="screenSpace" class="feed">
             <section class="topbar">
                 <div class="menu-btn"><button id="menuBtn" class="icon"><img src="img/icons/menu.svg"></button></div>
                 <div type="text" class="search">
@@ -95,6 +77,25 @@
             <section id="feedElem" class="content-inner">
                 
             </section>
+            
+            <nav class="dock">
+                <div class="main-nav">
+                    <button data-select="0" class="icon active"><img src="img/icons/feed.svg"><div class="active-marker"></div></button>
+                    <button data-select="1" class="icon"><img src="img/icons/collection.svg"><div class="active-marker"></div></button>
+                </div>
+                <div id="miniPlayer" class="mini-player">
+                    <div id="miniInfo" class="mini-info">
+                        <!-- js populate -->
+                    </div>
+                    <div class="song-controls">
+                        <button class="icon"><img src="img/icons/prev.svg"></button>
+                        <button class="icon"><img src="img/icons/next.svg"></button>
+                        <button class="icon" data-control="toggle-play"><img src="img/icons/play.svg"></button>
+                    </div>
+                    <div id="durationBar" class="duration-bar"></div>
+                </div>
+            </nav>
+            
         </div>
     </main>
     

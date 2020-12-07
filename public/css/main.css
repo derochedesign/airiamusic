@@ -2,20 +2,24 @@
 
 :root {
     --colour-black: black;
-    --colour-white: white;
-    
-    /* dynamic colours */
-    --colour-body: white;
-    --colour-text: black;
+    --colour-white: #EBE0E0;
+    --colour-dark: #1C1B20;
     
     --colour-lavender:#DED9ED;
-    --colour-light-lavender: #F7EEFF;
-    --colour-darkpurple: #110B20;
-    --colour-darkfont: #281A36;
+    --colour-light-lavender: #9B9296;
+    --colour-darkpurple: #151318;
+    --colour-darkfont: #1C1B20;
     --colour-grad-purple: #D55BFF;
     --colour-grad-blue: #45C0EE;
     --colour-lightpurple: #2B1C39;
     --colour-magenta: #502F59;
+    --colour-black-grey: #48474B;
+    --colour-white-grey: #9B9296;
+    
+    /* dynamic colours */
+    --colour-body: var(--colour-dark);
+    --colour-accent: var(--colour-black-grey);
+    --colour-text: var(--colour-lavender);
     
     --main-grad: linear-gradient(45deg, var(--colour-grad-blue), var(--colour-grad-purple));
     
@@ -85,7 +89,6 @@ h1 {
 
 h2, input {
     font: var(--light) 1em/1.3 var(--font);
-    --colour-text: var(--colour-darkfont);
 }
 h3 {
     font: var(--light) 1.26em/var(--linespace) var(--font);
@@ -107,7 +110,7 @@ h6 {
 }
 
 body {
-    /* background-color: var(--colour-blue); */
+    background-color: var(--colour-body);
     overflow: hidden;
 }
 
@@ -142,6 +145,7 @@ button.icon.special {
     padding: calc(var(--tight-padding) / 2);
     background: var(--main-grad);
     border-radius: var(--corner-large);
+    filter: invert(0) !important;
 }
 button.icon.special img {
     filter: invert(1);
@@ -156,7 +160,7 @@ button.quickshot {
 button.quickshot .shot {
     width: var(--quickshot-size);
     height: var(--quickshot-size);
-    background-color: var(--colour-lavender);
+    background-color: var(--colour-accent);
     border-radius: var(--corner-xl);
     padding: calc(var(--tight-padding) / 3);
     transition: transform 0.1s ease;
@@ -220,8 +224,9 @@ input.search-bar::placeholder {
 nav.dock {
     position: fixed;
     bottom: 0;
+    left: 0;
     width: 100%;
-    background: linear-gradient(rgba(255,255,255,0), white 70%);
+    background: linear-gradient(rgba(255,255,255,0), var(--colour-body) 70%);
     grid-template-columns: 30% 70%;
     display: grid;
     padding: 0 calc(var(--padding) / 3) calc(var(--padding) / 3) calc(var(--padding) / 4);
@@ -277,7 +282,7 @@ nav.dock .mini-player {
     grid-template-columns: min-content auto;
     align-items: center;
     gap: calc( var(--gap) / 2);
-    --colour-text: white;
+    --colour-text: var(--colour-white);
     position: relative;
     overflow: hidden;
     transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
@@ -333,6 +338,9 @@ nav.dock .mini-player .song-controls {
     justify-items: center;
     max-width: 8em;
     justify-self: right;
+}
+nav.dock .mini-player .song-controls .icon img {
+    filter: unset;
 }
 
 nav.dock .mini-player .duration-bar {
@@ -570,7 +578,7 @@ div.context .context-menu ul li:last-child {
     /* border-bottom: none; */
 }
 div.context .context-menu ul li:hover, div.context .context-menu ul li:focus {
-    background-color: var(--colour-lavender);
+    background-color: var(--colour-accent);
 }
 div.context .context-menu ul li div {
     height: 100%;
@@ -608,7 +616,7 @@ section.topbar .menu-btn button.active img {
 section.topbar .search {
     display: grid;
     grid-template-columns: min-content auto;
-    background-color: var(--colour-lavender);
+    background-color: var(--colour-accent);
     padding: calc(var(--tight-padding) / 1.3) var(--tight-padding);
     border-radius: var(--corner-large);
     grid-gap: var(--gap);
@@ -643,11 +651,30 @@ section.menu.active {
 /* ________________CONTENT LAYOUT__________________ */
 
 main.content div.feed {
+    --colour-body: var(--colour-dark);
+    --colour-text: var(--colour-white);
+    --colour-accent: var(--colour-black-grey);
+}
+main.content div.library {
+    --colour-body: var(--colour-white);
+    --colour-text: var(--colour-black);
+    --colour-accent: var(--colour-white-grey);
+}
+
+main.content div.feed .icon img {
+    filter: invert(1);
+}
+main.content div.feed .active-marker {
+    background-color: var(--colour-text);
+}
+
+main.content div.feed, main.content div.library {
     display: grid;
     grid-template-rows: min-content min-content auto;
     height: 100vh;
     grid-gap: var(--gap);
     padding: calc(var(--padding) / 2) var(--padding) 0 var(--padding);
+    background-color: var(--colour-body);
 }
 
 /* ________________NAV-HEAD__________________ */
@@ -695,7 +722,7 @@ section.quick-action {
     grid-template-columns: min-content auto;
     grid-gap: var(--gap);
     padding: calc(var(--tight-padding) / 2);
-    background-color: var(--colour-lavender);
+    background-color: var(--colour-accent);
     border-radius: var(--corner-large);
     align-items: center;
     margin-bottom: var(--tight-padding);

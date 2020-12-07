@@ -250,6 +250,7 @@ const switchPage = (select, evt) => {
 
 const switchView = select => {
    //select is an int that dictates which page to show; 0=feed, 1=library
+   const screenSpace = document.getElementById("screenSpace");
    const data = [{
       title: "Feed",
       options: [
@@ -262,6 +263,11 @@ const switchView = select => {
          "playlists", "category"
       ]
    }];
+   
+   screenSpace.className = "";
+   
+   if (select == 0) screenSpace.classList.add("feed");
+   else if (select == 1) screenSpace.classList.add("library");
    
    document.getElementById("navHead").innerHTML = populateView(data[Number(select)]);
    switchPage(data[Number(select)].options[0], null);
@@ -425,7 +431,7 @@ const generateLibrary = dataArr => {
    console.log(dataArr);
    
    return (
-      `<div>${dataArr.map(dat => `<div>${dat.name}</div>`).join('')}</div>`
+      `<div>${dataArr.map(dat => `<h3>${dat.name}</h3>`).join('')}</div>`
    )
 }
 
