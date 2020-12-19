@@ -120,13 +120,14 @@ main {
 
 /* ________________BTNS__________________ */
 
-button.button, button {
+button.button, button, .button {
     
     border: none;
     background: transparent;
     padding: 0;
     margin: 0;
     outline: none;
+    cursor: pointer;
 }
 button.icon, .icon {
     width: 2em;
@@ -788,7 +789,23 @@ section.content-entries .media-entry-large img {
 	animation: playing 3.6s linear infinite;
 }
 
-@media screen and (min-width: 70em) {
-
+@media screen and (min-width: 38em) {
+    nav.dock .mini-player.active {
+        opacity: 0;
+        transform: translateX(50vw);
+    }
+    nav.dock .mini-player * {
+        transition: transform 0.4s ease, opacity 0.7s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+    section.full-player {
+        max-width: 36em;
+        right: 0;
+    }
+    
+    nav.dock .mini-player {
+        max-width: 24em;
+        width: 100%;
+        justify-self: right;
+    }
 }
 

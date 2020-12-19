@@ -1,0 +1,25 @@
+main.content div.test-engine {
+    padding: var(--padding);
+}
+div.test-engine nav.dock {
+    position: relative;
+    width: 100%;
+    max-width: 24em;
+    background: unset;
+    display: block;
+    padding: 0;
+}
+
+nav.dock .mini-player {
+    background-color: var(--colour-darkpurple);
+    padding: calc(var(--tight-padding) / 1.2);
+    border-radius: var(--corner-large);
+    display: grid;
+    grid-template-columns: min-content auto;
+    align-items: center;
+    gap: calc( var(--gap) / 2);
+    --colour-text: var(--colour-white);
+    position: relative;
+    overflow: hidden;
+    transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+}

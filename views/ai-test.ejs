@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="theme-color" content="#ffffff"/>
+        
+        <title>player test</title>
+        <link rel="icon" href="img/favicon.png">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/test.css">
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+        <script src="js/hammer.min.js" charset="utf-8"></script>
+        
+        <!-- You need to bring your own Tone.js for the player, and tfjs for the model -->
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tensorflow/1.2.8/tf.min.js"></script> -->
+        <!-- Core library, since we're going to use a player -->
+        <script src="https://cdn.jsdelivr.net/npm/@magenta/music@^1.0.0"></script>
+        <script src="https://unpkg.com/tone@14.7.58/build/Tone.js"></script>
+    </head>
+<body>
+    <audio id="audioPlayerTest"></audio>
+    <main class="content">
+        <div class="test-engine">
+            <button id="variateBtn" class="button icon special variate-btn"><img src="img/icons/variate.svg"></button>
+            <nav class="dock">
+                <div id="miniPlayer" class="mini-player">
+                    <div id="miniInfoTest" class="mini-info">
+                        <!-- js populate -->
+                    </div>
+                    <div class="song-controls">
+                        <button class="icon"><img src="img/icons/prev.svg"></button>
+                        <button class="icon"><img src="img/icons/next.svg"></button>
+                        <button class="icon" data-control="toggle-play"><img src="img/icons/play.svg"></button>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </main>
+    <script src="js/engine.js" charset="utf-8"></script>
+</body>
+</html>

@@ -122,6 +122,7 @@ document.addEventListener("click", e => {
    
 });
 
+//override right click
 if (document.addEventListener) {
    document.addEventListener('contextmenu', function(e) {
      
