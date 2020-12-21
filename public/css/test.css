@@ -23,3 +23,8 @@ nav.dock .mini-player {
     overflow: hidden;
     transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
 }
+div.song-controls button.disabled.icon {
+    pointer-events: none;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
