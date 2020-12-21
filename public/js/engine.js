@@ -241,7 +241,7 @@ staticPlayer.sync().start(0);
 staticPlayer.playbackRate = speedAdjust;
 synthSignal.rampTo(pitchAdjust * 100);
 
-transp.bpm.value = clairo_whiteflag.bpm;
+transp.bpm.value = clairo_whiteflag.bpm * speedAdjust;
 synth.chain(reverb, wide, Tone.Destination);
 Tone.Destination.chain(m_distortion, m_reverb);
 
